@@ -1,0 +1,11 @@
+- Memo..
+
+- 신규 프로젝트 생성 방법
+	- 생성할 프로젝트의 루트 폴더로 이동하여 아래 명령어를 터미널에 입력
+        - RNCourse은 설정할 프로젝트 이름이다. 
+
+		npx create-expo-app --template blank RNCourse
+
+
+
+- 
