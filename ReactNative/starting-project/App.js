@@ -14,8 +14,8 @@ export default function App() {
   // styles는 View나 Text 컴포넌트에 스타일을 적용하는 데 사용됩니다.
   return (
     <View style={styles.appContainer}>
-      <View>
-        <TextInput placeholder = 'Your course goal!'/>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.textInput} placeholder = 'Your course goal!'/>
         <Button title = 'Add Goal' />
       </View>
       <View>
@@ -40,6 +40,17 @@ export default function App() {
 const styles = StyleSheet.create({
   appContainer : {
     padding: 50,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textInput : {
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    width: '80%',
+    marginRight: 8,
+    padding: 8
   }
 
 });
