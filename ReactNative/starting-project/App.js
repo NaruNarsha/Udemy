@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 // React Native의 모든 컴포넌트는 반드시 하나의 최상위 컴포넌트로 감싸져야 합니다.
 //  - <View> <View/> 안에는 복수의 <Text> 컴포넌트를 넣을 수 있습니다.
@@ -13,12 +13,14 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 export default function App() {
   // styles는 View나 Text 컴포넌트에 스타일을 적용하는 데 사용됩니다.
   return (
-    <View style={styles.container}>
+    <View style={styles.appContainer}>
       <View>
-        <Text style ={styles.dummyText}>Another piece of text!</Text>
+        <TextInput placeholder = 'Your course goal!'/>
+        <Button title = 'Add Goal' />
       </View>
-      <Text style ={styles.dummyText}>Hello World!</Text>
-      <Button title='Tab me!' /> 
+      <View>
+        <Text>List of goals...</Text>
+      </View>
     </View>
   );
 }
@@ -36,18 +38,10 @@ export default function App() {
 // - StyleSheet.create 메서드를 사용하면 성능 최적화가 가능합니다.
 // - 스타일 객체는 불변(immutable)으로 생성되므로, 런타임에 변경할 수 없습니다.
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  dummyText: {
-    margin: 16,
-    padding: 16,
-    borderWidth: 2,
-    borderColor: 'blue',
+  appContainer : {
+    padding: 50,
   }
+
 });
 
 
