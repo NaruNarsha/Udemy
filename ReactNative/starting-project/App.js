@@ -13,7 +13,7 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('')
-
+  const [courseGoals, setCourseGoals] = useState([]);
 
   // 사용자가 내용을 입력할 때 해당 입력값을 가져노는 역할
   function goalInputHandler(enteredText) {
@@ -25,9 +25,19 @@ export default function App() {
   // 버튼을 누르면 작동하는 함수
   function addGoalHandler() {
     console.log(enteredGoalText);
-  };
 
-  // styles는 View나 Text 컴포넌트에 스타일을 적용하는 데 사용됩니다.
+    // 기존의 courseGoals 배열을 복사하고, 새로운 목표를 추가
+    // ... (전개연산자)
+    // 아래 형태를 사용하는 이유 :
+    //    React의 상태 업데이트는 비동기적으로 처리될 수 있으므로,
+    //    이전 상태에 의존하는 새로운 상태를 설정할 때는
+    //    함수형 업데이트 형태를 사용하는 것이 안전합니다.
+    //  
+    //    이전 상태를 직접 참조하는 대신, 함수의 인자로 이전 상태를 받아와서 새로운 상태를 계산합니다
+    // setCourseGoals([...currentCourseGoals, enteredGoalText]);
+    setCourseGoals(currentCourseGoals => [...currentCourseGoals, enteredGoalText]);
+  }
+
   // onChangeText :: React Naitve에서 활용하는 프로퍼티로 텍스트 입력이 변경될 때마다 호출되는 콜백 함수를 지정합니다.
   return (
     <View style={styles.appContainer}>
@@ -40,7 +50,7 @@ export default function App() {
         <Button title = 'Add Goal' onPress ={addGoalHandler}  />
       </View>
       <View style = {styles.goalsContainer}>
-        <Text>List of goals...</Text>
+        {courseGoals.map((goal,index) => <Text key={index}>{goal}</Text>)}
       </View>
     </View>
   );
