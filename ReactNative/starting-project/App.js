@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 // React Native의 모든 컴포넌트는 반드시 하나의 최상위 컴포넌트로 감싸져야 합니다.
 //  - <View> <View/> 안에는 복수의 <Text> 컴포넌트를 넣을 수 있습니다.
@@ -17,10 +17,11 @@ export default function App() {
 
   // 사용자가 내용을 입력할 때 해당 입력값을 가져노는 역할
   function goalInputHandler(enteredText) {
-    console.log(enteredText);
+    //console.log(enteredText);
 
     setEnteredGoalText(enteredText);
   };
+
 
   // 버튼을 누르면 작동하는 함수
   function addGoalHandler() {
@@ -35,7 +36,7 @@ export default function App() {
     //  
     //    이전 상태를 직접 참조하는 대신, 함수의 인자로 이전 상태를 받아와서 새로운 상태를 계산합니다
     // setCourseGoals([...currentCourseGoals, enteredGoalText]);
-    setCourseGoals(currentCourseGoals => [...currentCourseGoals, enteredGoalText]);
+    setCourseGoals(currentCourseGoals => [...currentCourseGoals, {text: enteredGoalText, id: Math.random().toString()}]);
   }
 
   // onChangeText :: React Naitve에서 활용하는 프로퍼티로 텍스트 입력이 변경될 때마다 호출되는 콜백 함수를 지정합니다.
@@ -50,15 +51,27 @@ export default function App() {
         <Button title = 'Add Goal' onPress ={addGoalHandler}  />
       </View>
       <View style = {styles.goalsContainer}>
-        <ScrollView>
+        <FlatList 
+          data ={courseGoals} 
+          renderItem={(itemData) => {
+            return (
+              <View style = {styles.goalItem} >
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            );
+        }}
+        keyExtractor={(item, index) =>  {
+          return item.id;
+        }}
+        />
+        {/* <ScrollView>
           {courseGoals.map((goal, index) => 
             <View key={index} style={styles.goalItem} >
               <Text style={styles.goalText}>{goal}</Text>
             </View>
           )}
-        </ScrollView>
+        </ScrollView> */}
       </View>
-
     </View>
   );
 }
