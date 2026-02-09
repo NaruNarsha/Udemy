@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 // React Native의 모든 컴포넌트는 반드시 하나의 최상위 컴포넌트로 감싸져야 합니다.
 //  - <View> <View/> 안에는 복수의 <Text> 컴포넌트를 넣을 수 있습니다.
@@ -24,7 +24,7 @@ export default function App() {
 
   // 버튼을 누르면 작동하는 함수
   function addGoalHandler() {
-    console.log(enteredGoalText);
+    //console.log(enteredGoalText);
 
     // 기존의 courseGoals 배열을 복사하고, 새로운 목표를 추가
     // ... (전개연산자)
@@ -50,12 +50,15 @@ export default function App() {
         <Button title = 'Add Goal' onPress ={addGoalHandler}  />
       </View>
       <View style = {styles.goalsContainer}>
-        {courseGoals.map((goal, index) => 
-          <View key={index} style={styles.goalItem} >
-            <Text style={styles.goalText}>{goal}</Text>
-          </View>
-        )}
+        <ScrollView>
+          {courseGoals.map((goal, index) => 
+            <View key={index} style={styles.goalItem} >
+              <Text style={styles.goalText}>{goal}</Text>
+            </View>
+          )}
+        </ScrollView>
       </View>
+
     </View>
   );
 }
@@ -101,7 +104,7 @@ const styles = StyleSheet.create({
     padding: 8
   },
   goalsContainer: {
-    flex: 4,
+    flex: 5,
     //backgroundColor: 'yellow',
   },   
   goalItem: {
