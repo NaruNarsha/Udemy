@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import { StyleSheet, View, TextInput, Button, Modal } from "react-native";
 
 function GoalInput(props) {
   const [enteredGoalText, setEnteredGoalText] = useState("");
+
+  console.log("GoalInput :: ", props.visible);
 
   // 사용자가 내용을 입력할 때 해당 입력값을 가져노는 역할
   function goalInputHandler(enteredText) {
@@ -15,15 +17,17 @@ function GoalInput(props) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Your course goal!"
-        onChangeText={goalInputHandler}
-        value={enteredGoalText}
-      />
-      <Button title="Add Goal" onPress={addGoalHandler} />
-    </View>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your course goal!"
+          onChangeText={goalInputHandler}
+          value={enteredGoalText}
+        />
+        <Button title="Add Goal" onPress={addGoalHandler} />
+      </View>
+    </Modal>
   );
 }
 

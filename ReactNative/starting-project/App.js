@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, ScrollView, FlatList } from "react-native";
+import { StyleSheet, View, ScrollView, FlatList, Button } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -14,7 +14,12 @@ import GoalInput from "./components/GoalInput";
 //    - Button 컴포넌트는 title 속성을 사용하여 버튼에 표시될 텍스트를 지정합니다.
 
 export default function App() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [courseGoals, setCourseGoals] = useState([]);
+
+  function startAddGoalHandler() {
+    setModalIsVisible(true); 
+  }
 
   // 버튼을 누르면 작동하는 함수
   function addGoalHandler(enteredGoalText) {
@@ -47,9 +52,9 @@ export default function App() {
   // onChangeText :: React Naitve에서 활용하는 프로퍼티로 텍스트 입력이 변경될 때마다 호출되는 콜백 함수를 지정합니다.
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title="Add New Goal" color="#5e0acc" onPress = {startAddGoalHandler}/>
+      <GoalInput onAddGoal={addGoalHandler} visible={modalIsVisible} />
       <View style={styles.goalsContainer}>
-
         {/* FlatList를 사용할 경우의 예제 */}
         <FlatList
           data={courseGoals}
