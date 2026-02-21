@@ -36,8 +36,11 @@ export default function App() {
   }
 
 
-  function deleteGoalHandler() {
-    console.log('DELETE');
+  function deleteGoalHandler(id) {
+    console.log("deleteGoalHandler :: ", id);
+    setCourseGoals(currentCourseGoals => {
+      return currentCourseGoals.filter((goal) => goal.id !== id)
+    });
   }
 
 
@@ -46,11 +49,14 @@ export default function App() {
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={addGoalHandler} />
       <View style={styles.goalsContainer}>
+
+        {/* FlatList를 사용할 경우의 예제 */}
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
             return <GoalItem 
                       text={itemData.item.text} 
+                      id= {itemData.item.id}
                       onDeleteItem={deleteGoalHandler} 
                     />;
           }}
@@ -58,6 +64,8 @@ export default function App() {
             return item.id;
           }}
         />
+
+        {/* ScrollView를 사용할 경우의 예제 */}
         {/* <ScrollView>
           {courseGoals.map((goal, index) => 
             <View key={index} style={styles.goalItem} >
