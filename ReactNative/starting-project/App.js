@@ -35,6 +35,12 @@ export default function App() {
     ]);
   }
 
+
+  function deleteGoalHandler() {
+    console.log('DELETE');
+  }
+
+
   // onChangeText :: React Naitve에서 활용하는 프로퍼티로 텍스트 입력이 변경될 때마다 호출되는 콜백 함수를 지정합니다.
   return (
     <View style={styles.appContainer}>
@@ -43,7 +49,10 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} />;
+            return <GoalItem 
+                      text={itemData.item.text} 
+                      onDeleteItem={deleteGoalHandler} 
+                    />;
           }}
           keyExtractor={(item, index) => {
             return item.id;
