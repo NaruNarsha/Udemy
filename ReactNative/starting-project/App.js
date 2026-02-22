@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View, ScrollView, FlatList, Button } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -58,35 +60,38 @@ export default function App() {
 
   // onChangeText :: React Naitve에서 활용하는 프로퍼티로 텍스트 입력이 변경될 때마다 호출되는 콜백 함수를 지정합니다.
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add New Goal" color="#5e0acc" onPress = {startAddGoalHandler}/>
-      <GoalInput onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} visible={modalIsVisible} />
-      <View style={styles.goalsContainer}>
-        {/* FlatList를 사용할 경우의 예제 */}
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => {
-            return <GoalItem 
-                      text={itemData.item.text} 
-                      id= {itemData.item.id}
-                      onDeleteItem={deleteGoalHandler} 
-                    />;
-          }}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-        />
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button title="Add New Goal" color="#9962e2" onPress = {startAddGoalHandler}/>
+        <GoalInput onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} visible={modalIsVisible} />
+        <View style={styles.goalsContainer}>
+          {/* FlatList를 사용할 경우의 예제 */}
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              return <GoalItem 
+                        text={itemData.item.text} 
+                        id= {itemData.item.id}
+                        onDeleteItem={deleteGoalHandler} 
+                      />;
+            }}
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+          />
 
-        {/* ScrollView를 사용할 경우의 예제 */}
-        {/* <ScrollView>
-          {courseGoals.map((goal, index) => 
-            <View key={index} style={styles.goalItem} >
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          )}
-        </ScrollView> */}
+          {/* ScrollView를 사용할 경우의 예제 */}
+          {/* <ScrollView>
+            {courseGoals.map((goal, index) => 
+              <View key={index} style={styles.goalItem} >
+                <Text style={styles.goalText}>{goal}</Text>
+              </View>
+            )}
+          </ScrollView> */}
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 16,
-    backgroundColor: "#d1b5b5",
+    backgroundColor: "#1e085a",
   },
 
   goalsContainer: {
