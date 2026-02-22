@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { StyleSheet, View, TextInput, Button, Modal } from "react-native";
+import { StyleSheet, View, TextInput, Button, Modal, Image } from "react-native";
+
+
+
 
 function GoalInput(props) {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -16,9 +19,13 @@ function GoalInput(props) {
     setEnteredGoalText(""); // 새로운 목표가 추가된 후 입력 필드를 초기화
   }
 
+  // 1. require('../assets/images/goal.png')
+  // 2. 파일 상단에 import 구문 추가: import goalImage from '../assets/images/goal.png';
+  // 3. Image 컴포넌트에서 source에 goalImage 사용: <Image style={styles.image} source={goalImage} />
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image style = {styles.image} source={require('../assets/images/goal.png')} />
         <TextInput
           style={styles.textInput}
           placeholder="Your course goal!"
@@ -46,14 +53,20 @@ export default GoalInput;
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "column", // "row": 자식들이 가로로 나란히 배치됨, "column": 자식들이 세로로 나란히 배치됨
+    //flexDirection: "column", // "row": 자식들이 가로로 나란히 배치됨, "column": 자식들이 세로로 나란히 배치됨
     justifyContent: "center", // 주축(가로 또는 세로 방향) 기준으로 중앙에 배치
     alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
+    //marginBottom: 24,
+    //borderBottomWidth: 1,
+    //borderBottomColor: "#cccccc",
     //backgroundColor: '#e4bebe',
     padding : 16, // 내부 여백을 16 단위로 설정하여 요소들이 컨테이너의 가장자리에서 떨어지도록 함
+    backgroundColor: '#311b6b'
+  },
+  image:{
+    width: 100,
+    height: 100,
+    margine:20,
   },
   textInput: {
     borderWidth: 1,
