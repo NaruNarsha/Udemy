@@ -21,6 +21,11 @@ export default function App() {
     setModalIsVisible(true); 
   }
 
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
+  }
+
+
   // 버튼을 누르면 작동하는 함수
   function addGoalHandler(enteredGoalText) {
     //console.log(enteredGoalText);
@@ -38,6 +43,8 @@ export default function App() {
       ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
+
+    endAddGoalHandler(); // 목표가 추가된 후 모달을 닫음
   }
 
 
@@ -53,7 +60,7 @@ export default function App() {
   return (
     <View style={styles.appContainer}>
       <Button title="Add New Goal" color="#5e0acc" onPress = {startAddGoalHandler}/>
-      <GoalInput onAddGoal={addGoalHandler} visible={modalIsVisible} />
+      <GoalInput onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} visible={modalIsVisible} />
       <View style={styles.goalsContainer}>
         {/* FlatList를 사용할 경우의 예제 */}
         <FlatList
