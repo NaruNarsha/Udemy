@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: '#4e0329',
+    backgroundColor: '#3b021f',
     borderRadius: 8,
     elevation: 4,       // only for android, for ios we need to use shadow properties
     shadowColor: 'black', // only for ios
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontWeight: 'bold',
     textAlign: 'center',
-    backgroundColor: '#750270', // 영역 체크용 background color
   },
   buttonsContainer:{
     flexDirection: 'row',
