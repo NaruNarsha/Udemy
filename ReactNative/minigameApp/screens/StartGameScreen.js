@@ -1,22 +1,35 @@
-import {TextInput, View, StyleSheet } from 'react-native';
+import {useState} from 'react';
+import {TextInput, View, StyleSheet} from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 
 function StartGameScreen() {
+  const [enteredNumber, setEnteredNumber] = useState('');
+
+  function numberInputHandler(enteredText) {
+    setEnteredNumber(enteredText);
+  }
+
+  function confirmInputHandler() {
+    console.log('confirm!');
+  }
+
   return (
-    <View style = {styles.inputContainer}>
-      <TextInput 
-        style={styles.numberInput} 
-        maxLength={2} 
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.numberInput}
+        maxLength={2}
         keyboardType='number-pad'
-        autoCapitalized = 'none'
-        autoCorrect = {false}
+        autoCapitalized='none'
+        autoCorrect={false}
+        value={enteredNumber}
+        onChangeText={numberInputHandler}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <PrimaryButton>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Confirm</PrimaryButton>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
@@ -41,15 +54,15 @@ export default StartGameScreen;
 const styles = StyleSheet.create({
   inputContainer: {
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
     backgroundColor: '#3b021f',
     borderRadius: 8,
-    elevation: 4,       // only for android, for ios we need to use shadow properties
+    elevation: 4, // only for android, for ios we need to use shadow properties
     shadowColor: 'black', // only for ios
-    shadowOffset: { width: 0, height: 2 }, // only for ios
+    shadowOffset: {width: 0, height: 2}, // only for ios
     shadowRadius: 6, // only for ios
     shadowOpacity: 0.25, // only for ios
   },
@@ -65,10 +78,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  buttonsContainer:{
+  buttonsContainer: {
     flexDirection: 'row',
   },
   buttonContainer: {
     flex: 1,
-  }
+  },
 });
